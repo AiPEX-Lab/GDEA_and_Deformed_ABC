@@ -17,4 +17,4 @@ We introduce Deformed ABC, a linear-elastic FEM dataset featuring diverse geomet
 
 Further details on the FEM formulation and data preprocessing are provided in the Supplementary Information, and Code snippets for data preprocessing are available in this repository.
 
-The original and scaled Deformed ABC is shared at huggingface.co/datasets/Junghunl/Deformed_ABC
+The original and scaled Deformed ABC is shared at huggingface.co/datasets/Junghunl/Deformed-ABC
