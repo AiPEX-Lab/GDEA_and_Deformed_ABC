@@ -51,8 +51,8 @@ config = {
     },
     "optimize": {
         "optimizer": "AdamW",
-        "lr": 0.0001285,
-        "weight_decay": 2.0645e-6
+        "lr": 0.0001,
+        "weight_decay": 1e-6
     },
     "schedule": {
         "scheduler": "ReduceLROnPlateau",
