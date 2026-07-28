@@ -128,7 +128,7 @@ class Flag(Dataset):
         edge_index = torch.stack([
             torch.cat([src, dst]),
             torch.cat([dst, src])
-        ], dim=0)  # (2, E*2)
+        ], dim=0)
 
         return edge_index
 
