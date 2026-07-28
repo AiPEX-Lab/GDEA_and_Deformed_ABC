@@ -1022,7 +1022,7 @@ def is_valid_sample(data):
                     return False
         return True
     except Exception as e:
-        print(f"[Error] sample 검사 중 오류: {e}")
+        print(f"[Error] sample error: {e}")
         return False
 
 def filter_dataset(dataset, desc="Filtering dataset"):
@@ -1107,7 +1107,7 @@ def DeformedABC_procedure(args):
 def main():
     torch.cuda.empty_cache()
     # Load configuration defined in the top of this code
-    args = config.copy()  # config는 이미 위에서 정의된 dict
+    args = config.copy()
     
     # Set up logging and directories
     if args['log']['log'] is True:
