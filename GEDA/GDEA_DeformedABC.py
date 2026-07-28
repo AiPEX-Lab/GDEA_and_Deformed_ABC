@@ -1104,36 +1104,41 @@ def DeformedABC_procedure(args):
         loss_list=['disp']
     )
 
-torch.cuda.empty_cache()
+def main():
+    torch.cuda.empty_cache()
+    # Load configuration defined in the top of this code
+    args = config.copy()  # config는 이미 위에서 정의된 dict
+    
+    # Set up logging and directories
+    if args['log']['log'] is True:
+        saving_path, saving_name = set_up_logger(
+            args["model"]["model_name"],
+            args["data"]["dataset"],
+            args["log"]["log_dir"]
+        )
+    elif args["train"].get('save_best', False) or args["train"].get('save_check_points', False):
+        saving_path, saving_name = get_dir_path(
+            args["model"]["model_name"],
+            args["data"]["dataset"],
+            args["log"]["log_dir"]
+        )
+    else:
+        saving_path, saving_name = None, None
 
-args = config.copy()  # config is the python dictionary at the top.
+    args['saving_path'] = saving_path
+    args['saving_name'] = saving_name
 
-if args['log']['log'] is True:
-    saving_path, saving_name = set_up_logger(
-        args["model"]["model_name"],
-        args["data"]["dataset"],
-        args["log"]["log_dir"]
-    )
-elif args["train"].get('save_best', False) or args["train"].get('save_check_points', False):
-    saving_path, saving_name = get_dir_path(
-        args["model"]["model_name"],
-        args["data"]["dataset"],
-        args["log"]["log_dir"]
-    )
-else:
-    saving_path, saving_name = None, None
+    save_config(args, saving_path)
+    
+    # Set device and random seeds
+    set_device(args["train"]["cuda"], args["train"]["device"])
+    set_seed(args["train"]["random_seed"])
 
-args['saving_path'] = saving_path
-args['saving_name'] = saving_name
+    # Run dataset-specific procedure
+    if args["data"]["dataset"] == "DeformedABC":
+        DeformedABC_procedure(args)
+    else:
+        raise NotImplementedError(f"Dataset {args['data']['dataset']} is not implemented")
 
-save_config(args, saving_path)
-
-# Set device and random seeds
-set_device(args["train"]["cuda"], args["train"]["device"])
-set_seed(args["train"]["random_seed"])
-
-# Run dataset-specific procedure
-if args["data"]["dataset"] == "DeformedABC":
-    DeformedABC_procedure(args)
-else:
-    raise NotImplementedError(f"Dataset {args['data']['dataset']} is not implemented")
+if __name__ == "__main__":
+    main()
