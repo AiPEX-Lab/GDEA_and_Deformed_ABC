@@ -40,7 +40,7 @@ config = {
     },
     "data": {
         "dataset": "AdditiveManufacturing",
-        "data_path": "/home/aipexws2/Junghun/Final_Models2/Data5/4_Sampled", # NetFabb
+        "data_path": "Your data path",
         "sample_factor": 1,
         "train_batchsize": 8,
         "eval_batchsize": 1,
@@ -711,7 +711,7 @@ class BaseTrainer:
         all_val_node_sizes = []
         
         # Define log path
-        non_log_path = '/home/aipexws2/Junghun/Final_Models2/Models/My_model32'
+        non_log_path = 'Your log path'
         os.makedirs(non_log_path, exist_ok=True) # Generate path if not there
         save_filename = os.path.join(non_log_path, "mdl-GDEA-losses.npz")
 
