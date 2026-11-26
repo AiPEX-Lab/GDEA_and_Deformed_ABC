@@ -32,7 +32,7 @@ df_mesh = df_mesh.drop(['Unnamed: 0'], axis=1)
 # Merge dataframes
 df_FEA_merged = pd.merge(
     df_FEA,
-    df_mesh[['file', 'Vertex number', 'Boundary box x (mm)', 'Boundary box y (mm)', 'Boundary box z (mm)']],  # 필요한 컬럼만 선택
+    df_mesh[['file', 'Vertex number', 'Boundary box x (mm)', 'Boundary box y (mm)', 'Boundary box z (mm)']],
     on='file',
     how='left'
 )
